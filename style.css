@@ -1,0 +1,96 @@
+:root {
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  --main-grey: #e7e5e4;
+  --text-size: 1.2rem;
+  --main-color: #acd7ec;
+  --global-margin-top: 36px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--main-grey);
+}
+
+.container {
+  height: 100vh;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+  background-color: white;
+  box-shadow: var(--shadow);
+}
+
+/*Gap*/
+.navigation-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  gap: 25px;
+}
+
+.left-nav {
+  font-size: 1.8rem;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-top: 10px;
+  width: 150px;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.4s;
+}
+
+.log {
+  color: rgb(104, 85, 224);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(104, 85, 224, 1);
+}
+
+.log:hover {
+  color: white;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+  background-color: rgba(104, 85, 224, 1);
+}
+
+.add {
+  font-size: 1.2rem;
+  padding: 20px;
+}
+
+.add:hover {
+  color: white;
+  box-shadow: 0 0 20px rgba(224, 203, 85, 0.6);
+  background-color: rgb(85, 224, 108);
+}
+
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--global-margin-top);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--global-margin-top);
+  background-color: #acd7ec;
+}

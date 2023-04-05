@@ -8,5 +8,63 @@
     <script defer src="script.js"></script>
     <title>Project-Library</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="navigation-container">
+          <div class="left-nav">
+            <h1>Library</h1>
+          </div>
+          <div class="right-nav">
+            <button class="log">Log In</button>
+          </div>
+        </div>
+      </nav>
+      <div class="book-container">
+        <button class="add">Add book</button>
+      </div>
+
+      <form class="hide">
+        <div class="form-container">
+          <div class="user-input-box">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="user-input-box">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="user-input-box">
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              max="99"
+              required
+            />
+          </div>
+          <div class="user-input-box">
+            <label for="vehicle1">Have you read it yet</label>
+            <input type="checkbox" id="checkread" name="checkread" />
+          </div>
+        </div>
+        <div class="create-account">
+          <button class="create-btn" type="submit" id="submit-btn">
+            submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
