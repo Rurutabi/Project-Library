@@ -26,7 +26,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 10%;
+  height: max(100px, 10%);
   background-color: white;
   box-shadow: var(--shadow);
 }
@@ -57,15 +57,13 @@ button {
 }
 
 .log {
-  color: rgb(104, 85, 224);
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(104, 85, 224, 1);
+  color: black;
+  background-color: var(--main-grey);
 }
 
 .log:hover {
-  color: white;
-  box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
-  background-color: rgba(104, 85, 224, 1);
+  box-shadow: 0 0 20px rgba(89, 224, 85, 0.6);
+  background-color: rgb(85, 224, 108);
 }
 
 .add {
@@ -74,12 +72,11 @@ button {
 }
 
 .add:hover {
-  color: white;
   box-shadow: 0 0 20px rgba(224, 203, 85, 0.6);
   background-color: rgb(85, 224, 108);
 }
 
-.book-container {
+.add-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,6 +88,128 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: var(--global-margin-top);
+  height: 250px;
+  width: 350px;
+  font-size: 1.2rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 48px;
+  border-radius: 5%;
+  background-color: #acd7ec;
+  box-shadow: var(--shadow);
+}
+
+.user-input-box {
+  display: flex;
+  justify-content: center;
+}
+
+.create-btn,
+.input-box {
+  width: 100%;
+}
+
+.input-box {
+  padding: 16px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  font-weight: bold;
+  gap: 12px;
+}
+
+.checkbox {
+  margin-top: auto;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+.create-btn {
+  font-size: 1.2rem;
+}
+
+.create-btn:hover {
+  color: black;
+  box-shadow: 0 0 20px rgba(224, 203, 85, 0.6);
+  background-color: rgb(85, 224, 108);
+}
+
+/* Hide and overlay*/
+.hide {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  cursor: pointer;
+}
+
+form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 2;
+  animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 75%;
+  flex-wrap: wrap;
+  background-color: #acd7ec;
+  margin: auto;
+  gap: 5%;
+}
+
+.added-book {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 300px;
+  gap: 24px;
+  padding: 36px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: var(--shadow);
+  margin-top: 5%;
+}
+
+.checkread-btn,
+.remove-btn {
   background-color: #acd7ec;
 }

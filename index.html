@@ -10,6 +10,7 @@
   </head>
   <body>
     <div class="container">
+      <div class="overlay hide"></div>
       <nav>
         <div class="navigation-container">
           <div class="left-nav">
@@ -20,14 +21,15 @@
           </div>
         </div>
       </nav>
-      <div class="book-container">
+      <div class="add-container">
         <button class="add">Add book</button>
       </div>
-
-      <form class="hide">
+      <form class="form hide">
         <div class="form-container">
+          <h2>Add a new Book</h2>
           <div class="user-input-box">
             <input
+              class="input-box"
               type="text"
               id="title"
               name="title"
@@ -37,34 +39,58 @@
           </div>
           <div class="user-input-box">
             <input
+              class="input-box"
               type="text"
-              id="title"
-              name="title"
-              placeholder="Title"
+              id="author"
+              name="author"
+              placeholder="Author"
               required
             />
           </div>
           <div class="user-input-box">
             <input
+              class="input-box"
               type="number"
               id="quantity"
               name="quantity"
+              placeholder="Pages"
               min="1"
               max="99"
               required
             />
           </div>
-          <div class="user-input-box">
-            <label for="vehicle1">Have you read it yet</label>
-            <input type="checkbox" id="checkread" name="checkread" />
+          <div class="user-input-box checkbox-container">
+            <label for="checkread">Have you read it yet</label>
+            <input
+              class="checkbox"
+              type="checkbox"
+              id="checkread"
+              name="checkread"
+            />
+          </div>
+          <div class="create-account">
+            <button class="create-btn" type="submit" id="submit-btn">
+              Submit
+            </button>
           </div>
         </div>
-        <div class="create-account">
-          <button class="create-btn" type="submit" id="submit-btn">
-            submit
-          </button>
-        </div>
       </form>
+      <div class="book-container">
+        <div class="added-book">
+          <p>Bible</p>
+          <p>Richard Elliott Friedman</p>
+          <p>15</p>
+          <div class="checkread-container">
+            <button class="checkread-btn" type="submit" id="submit-btn">
+              Read
+            </button>
+          </div>
+          <div class="remove-container">
+            <button class="remove-btn" type="submit" id="submit-btn">
+              Remove
+            </button>
+          </div>
+        </div>
     </div>
   </body>
 </html>
