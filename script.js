@@ -1,5 +1,4 @@
 const addButton = document.querySelector('.add');
-const addButtonForm = document.querySelector('.added-book');
 const form = document.querySelector('.form');
 const overlay = document.querySelector('.overlay');
 const submitButton = document.querySelector('.submit-btn');
@@ -7,6 +6,7 @@ const titleInput = document.getElementById('title');
 const authorInput = document.getElementById('author');
 const pagesInput = document.getElementById('pages');
 const logButton = document.querySelector('.log');
+const bookContainer = document.querySelector('.book-container');
 
 class Book {
   library = [];
@@ -38,30 +38,53 @@ class Book {
   setResult() {
     submitButton.addEventListener('click', e => {
       e.preventDefault();
-      const html = `<div class="added-book">
-      <p>${titleInput.value}</p>
-      <p>${authorInput.value}</p>
-      <p>${pagesInput.value}</p>
-      <div class="checkread-container">
-        <button class="checkread-btn" type="submit" id="submit-btn">
-          Read
-        </button>
-      </div>
-      <div class="remove-container">
-        <button class="remove-btn" type="submit" id="submit-btn">
-          Remove
-        </button>
-      </div>
-    </div>`;
+      const addedBook = document.createElement('div');
+      addedBook.classList.add('added-book');
+
+      const bookTitle = document.createElement('p');
+      bookTitle.textContent = titleInput.value;
+      addedBook.appendChild(bookTitle);
+
+      const bookAuthor = document.createElement('p');
+      bookAuthor.textContent = authorInput.value;
+      addedBook.appendChild(bookAuthor);
+
+      const bookPages = document.createElement('p');
+      bookPages.textContent = pagesInput.value;
+      addedBook.appendChild(bookPages);
+
+      const readButtonContainer = document.createElement('div');
+      readButtonContainer.classList.add('checkread-container');
+
+      const readButton = document.createElement('button');
+      readButton.classList.add('checkread-btn');
+      readButton.textContent = 'Read';
+      readButtonContainer.appendChild(readButton);
+      addedBook.appendChild(readButtonContainer);
+
+      const removeButtonContainer = document.createElement('div');
+      removeButtonContainer.classList.add('remove-container');
+
+      const removeButton = document.createElement('button');
+      removeButton.classList.add('remove-btn');
+      removeButton.textContent = 'Remove';
+      removeButtonContainer.appendChild(removeButton);
+      addedBook.appendChild(removeButtonContainer);
+
       titleInput.value = '';
       authorInput.value = '';
       pagesInput.value = '';
       form.classList.add('hide');
       overlay.classList.add('hide');
-      addButtonForm.insertAdjacentHTML('afterend', html);
-      // console.log(this.title);
-      // console.log(this.author);
-      // console.log(this.pages);
+      bookContainer.appendChild(addedBook);
+
+      this.removeBook(removeButton, addedBook);
+    });
+  }
+
+  removeBook(removeButton, addButtonForm) {
+    removeButton.addEventListener('click', () => {
+      addButtonForm.remove();
     });
   }
 
