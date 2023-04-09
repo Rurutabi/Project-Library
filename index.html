@@ -29,6 +29,7 @@
           <h2>Add a new Book</h2>
           <div class="user-input-box">
             <input
+              title ="need a book name"
               class="input-box"
               type="text"
               id="title"
@@ -36,14 +37,15 @@
               placeholder="Title"
               required
             />
+
           </div>
+          <div class="error hide">Book name is required</div>
           <div class="user-input-box">
             <input
               class="input-box"
               type="text"
               id="name"
-              name="name"
-              
+              name="name"          
               placeholder="Author"
               required
             />
@@ -56,7 +58,7 @@
               name="pages"
               placeholder="Pages"
               min="1"
-              max="99"
+              max="999999"
               required
             />
           </div>

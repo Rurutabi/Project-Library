@@ -40,8 +40,11 @@ class Book {
       if (
         titleInput.value !== '' &&
         authorInput.value !== '' &&
-        pagesInput.value !== ''
+        pagesInput.value !== '' &&
+        pagesInput.value > 0 &&
+        pagesInput.value < 999999
       ) {
+        // if ((pagesInput.value > 0) & (pagesInput < 99)) {
         e.preventDefault();
         const addedBook = document.createElement('div');
         addedBook.classList.add('added-book');
