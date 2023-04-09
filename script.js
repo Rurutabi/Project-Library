@@ -3,7 +3,7 @@ const form = document.querySelector('.form');
 const overlay = document.querySelector('.overlay');
 const submitButton = document.querySelector('.submit-btn');
 const titleInput = document.getElementById('title');
-const authorInput = document.getElementById('author');
+const authorInput = document.getElementById('name');
 const pagesInput = document.getElementById('pages');
 const logButton = document.querySelector('.log');
 const bookContainer = document.querySelector('.book-container');
@@ -17,7 +17,7 @@ class Book {
   constructor() {
     this.displayForm();
     this.overlayRemove();
-    this.setResult();
+    this.createBook();
     this.checkingValue();
   }
 
@@ -35,50 +35,56 @@ class Book {
     });
   }
 
-  setResult() {
+  createBook() {
     submitButton.addEventListener('click', e => {
-      e.preventDefault();
-      const addedBook = document.createElement('div');
-      addedBook.classList.add('added-book');
+      if (
+        titleInput.value !== '' &&
+        authorInput.value !== '' &&
+        pagesInput.value !== ''
+      ) {
+        e.preventDefault();
+        const addedBook = document.createElement('div');
+        addedBook.classList.add('added-book');
 
-      const bookTitle = document.createElement('p');
-      bookTitle.textContent = titleInput.value;
-      addedBook.appendChild(bookTitle);
+        const bookTitle = document.createElement('p');
+        bookTitle.textContent = titleInput.value;
+        addedBook.appendChild(bookTitle);
 
-      const bookAuthor = document.createElement('p');
-      bookAuthor.textContent = authorInput.value;
-      addedBook.appendChild(bookAuthor);
+        const bookAuthor = document.createElement('p');
+        bookAuthor.textContent = authorInput.value;
+        addedBook.appendChild(bookAuthor);
 
-      const bookPages = document.createElement('p');
-      bookPages.textContent = pagesInput.value;
-      addedBook.appendChild(bookPages);
+        const bookPages = document.createElement('p');
+        bookPages.textContent = pagesInput.value;
+        addedBook.appendChild(bookPages);
 
-      const readButtonContainer = document.createElement('div');
-      readButtonContainer.classList.add('checkread-container');
+        const readButtonContainer = document.createElement('div');
+        readButtonContainer.classList.add('checkread-container');
 
-      const readButton = document.createElement('button');
-      readButton.classList.add('checkread-btn');
-      readButton.textContent = 'Read';
-      readButtonContainer.appendChild(readButton);
-      addedBook.appendChild(readButtonContainer);
+        const readButton = document.createElement('button');
+        readButton.classList.add('checkread-btn');
+        readButton.textContent = 'Read';
+        readButtonContainer.appendChild(readButton);
+        addedBook.appendChild(readButtonContainer);
 
-      const removeButtonContainer = document.createElement('div');
-      removeButtonContainer.classList.add('remove-container');
+        const removeButtonContainer = document.createElement('div');
+        removeButtonContainer.classList.add('remove-container');
 
-      const removeButton = document.createElement('button');
-      removeButton.classList.add('remove-btn');
-      removeButton.textContent = 'Remove';
-      removeButtonContainer.appendChild(removeButton);
-      addedBook.appendChild(removeButtonContainer);
+        const removeButton = document.createElement('button');
+        removeButton.classList.add('remove-btn');
+        removeButton.textContent = 'Remove';
+        removeButtonContainer.appendChild(removeButton);
+        addedBook.appendChild(removeButtonContainer);
 
-      titleInput.value = '';
-      authorInput.value = '';
-      pagesInput.value = '';
-      form.classList.add('hide');
-      overlay.classList.add('hide');
-      bookContainer.appendChild(addedBook);
+        titleInput.value = '';
+        authorInput.value = '';
+        pagesInput.value = '';
+        form.classList.add('hide');
+        overlay.classList.add('hide');
+        bookContainer.appendChild(addedBook);
 
-      this.removeBook(removeButton, addedBook);
+        this.removeBook(removeButton, addedBook);
+      }
     });
   }
 
