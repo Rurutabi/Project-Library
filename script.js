@@ -7,6 +7,7 @@ const authorInput = document.getElementById('name');
 const pagesInput = document.getElementById('pages');
 const logButton = document.querySelector('.log');
 const bookContainer = document.querySelector('.book-container');
+const checkForm = document.getElementById('checkread');
 
 class Book {
   library = [];
@@ -65,7 +66,7 @@ class Book {
         readButtonContainer.classList.add('checkread-container');
 
         const readButton = document.createElement('button');
-        readButton.classList.add('checkread-btn');
+        this.checkReadBox(readButton);
         readButton.textContent = 'Read';
         readButtonContainer.appendChild(readButton);
         addedBook.appendChild(readButtonContainer);
@@ -82,11 +83,36 @@ class Book {
         titleInput.value = '';
         authorInput.value = '';
         pagesInput.value = '';
+        checkForm.checked = false;
         form.classList.add('hide');
         overlay.classList.add('hide');
         bookContainer.appendChild(addedBook);
 
+        this.changeRead(readButton);
+        this.checkReadBox(readButton);
         this.removeBook(removeButton, addedBook);
+      }
+    });
+  }
+
+  checkReadBox(checkbox) {
+    if (checkForm.checked) {
+      checkbox.classList.add('green-button');
+    } else {
+      checkbox.classList.add('checkread-btn');
+    }
+  }
+
+  changeRead(checkbox) {
+    checkbox.addEventListener('click', () => {
+      if (checkbox.classList.contains('green-button')) {
+        checkbox.classList.remove('green-button');
+        checkbox.classList.add('checkread-btn');
+      } else if (checkbox.classList.contains('checkread-btn')) {
+        checkbox.classList.remove('checkread-btn');
+        checkbox.classList.add('green-button');
+      } else {
+        console.log('Something went wrong');
       }
     });
   }

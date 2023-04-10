@@ -35,9 +35,8 @@
               id="title"
               name="title"
               placeholder="Title"
-              required
-            />
-
+              oninvalid="this.setCustomValidity('Please Enter Book Title')"
+              required/>
           </div>
           <div class="error hide">Book name is required</div>
           <div class="user-input-box">
@@ -47,6 +46,7 @@
               id="name"
               name="name"          
               placeholder="Author"
+              oninvalid="this.setCustomValidity('Please Enter Author Name')"
               required
             />
           </div>
@@ -59,6 +59,7 @@
               placeholder="Pages"
               min="1"
               max="999999"
+              oninvalid="this.setCustomValidity('Please Enter Number Between 1 - 999999')"
               required
             />
           </div>
@@ -84,7 +85,7 @@
           <p>Richard Elliott Friedman</p>
           <p>15</p>
           <div class="checkread-container">
-            <button class="checkread-btn" type="submit" id="submit-btn">
+            <button class="checkread-btn green-button" type="submit" id="submit-btn">
               Read
             </button>
           </div>

@@ -214,4 +214,10 @@ form {
 .checkread-btn,
 .remove-btn {
   background-color: #acd7ec;
+  animation: fadeIn 1s;
+}
+
+.green-button {
+  background-color: rgb(85, 224, 108);
+  animation: fadeIn 1s;
 }
