@@ -18,8 +18,8 @@ class Book {
   constructor() {
     this.displayForm();
     this.overlayRemove();
-    this.createBook();
-    this.checkingValue();
+    this.submitBook();
+    this.getLocalStorage();
   }
 
   displayForm() {
@@ -36,8 +36,47 @@ class Book {
     });
   }
 
-  createBook() {
-    submitButton.addEventListener('click', e => {
+  createBook(newBook) {
+    const addedBook = document.createElement('div');
+    addedBook.classList.add('added-book');
+
+    const bookTitle = document.createElement('p');
+    bookTitle.textContent = newBook.title;
+    addedBook.appendChild(bookTitle);
+
+    const bookAuthor = document.createElement('p');
+    bookAuthor.textContent = newBook.author;
+    addedBook.appendChild(bookAuthor);
+
+    const bookPages = document.createElement('p');
+    bookPages.textContent = newBook.pages;
+    addedBook.appendChild(bookPages);
+
+    const readButtonContainer = document.createElement('div');
+    readButtonContainer.classList.add('checkread-container');
+
+    const readButton = document.createElement('button');
+    readButton.textContent = 'Read';
+    readButtonContainer.appendChild(readButton);
+    addedBook.appendChild(readButtonContainer);
+
+    const removeButtonContainer = document.createElement('div');
+    removeButtonContainer.classList.add('remove-container');
+
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('remove-btn');
+    removeButton.textContent = 'Remove';
+    removeButtonContainer.appendChild(removeButton);
+    addedBook.appendChild(removeButtonContainer);
+    bookContainer.appendChild(addedBook);
+
+    this.changeButtonColor(readButton, newBook);
+    this.checkReadBox(readButton, newBook);
+    this.removeBook(removeButton, addedBook);
+  }
+
+  submitBook() {
+    submitButton.addEventListener('click', event => {
       if (
         titleInput.value !== '' &&
         authorInput.value !== '' &&
@@ -45,40 +84,20 @@ class Book {
         pagesInput.value > 0 &&
         pagesInput.value < 999999
       ) {
-        // if ((pagesInput.value > 0) & (pagesInput < 99)) {
-        e.preventDefault();
-        const addedBook = document.createElement('div');
-        addedBook.classList.add('added-book');
+        event.preventDefault();
 
-        const bookTitle = document.createElement('p');
-        bookTitle.textContent = titleInput.value;
-        addedBook.appendChild(bookTitle);
+        const newBook = {
+          title: titleInput.value,
+          author: authorInput.value,
+          pages: pagesInput.value,
+          checkRead: checkForm.checked,
+        };
+        this.library.push(newBook);
 
-        const bookAuthor = document.createElement('p');
-        bookAuthor.textContent = authorInput.value;
-        addedBook.appendChild(bookAuthor);
+        this.createBook(newBook);
 
-        const bookPages = document.createElement('p');
-        bookPages.textContent = pagesInput.value;
-        addedBook.appendChild(bookPages);
-
-        const readButtonContainer = document.createElement('div');
-        readButtonContainer.classList.add('checkread-container');
-
-        const readButton = document.createElement('button');
-        this.checkReadBox(readButton);
-        readButton.textContent = 'Read';
-        readButtonContainer.appendChild(readButton);
-        addedBook.appendChild(readButtonContainer);
-
-        const removeButtonContainer = document.createElement('div');
-        removeButtonContainer.classList.add('remove-container');
-
-        const removeButton = document.createElement('button');
-        removeButton.classList.add('remove-btn');
-        removeButton.textContent = 'Remove';
-        removeButtonContainer.appendChild(removeButton);
-        addedBook.appendChild(removeButtonContainer);
+        // Store the library array in local storage as a JSON string
+        this.setLocalStroage();
 
         titleInput.value = '';
         authorInput.value = '';
@@ -86,31 +105,30 @@ class Book {
         checkForm.checked = false;
         form.classList.add('hide');
         overlay.classList.add('hide');
-        bookContainer.appendChild(addedBook);
-
-        this.changeRead(readButton);
-        this.checkReadBox(readButton);
-        this.removeBook(removeButton, addedBook);
       }
     });
   }
 
-  checkReadBox(checkbox) {
-    if (checkForm.checked) {
+  checkReadBox(checkbox, newBook) {
+    if (newBook.checkRead === true) {
       checkbox.classList.add('green-button');
     } else {
       checkbox.classList.add('checkread-btn');
     }
   }
 
-  changeRead(checkbox) {
+  changeButtonColor(checkbox, newBook) {
     checkbox.addEventListener('click', () => {
       if (checkbox.classList.contains('green-button')) {
         checkbox.classList.remove('green-button');
         checkbox.classList.add('checkread-btn');
+        newBook.checkRead = false;
+        console.log(newBook.checkRead);
       } else if (checkbox.classList.contains('checkread-btn')) {
         checkbox.classList.remove('checkread-btn');
         checkbox.classList.add('green-button');
+        newBook.checkRead = true;
+        console.log(newBook.checkRead);
       } else {
         console.log('Something went wrong');
       }
@@ -123,10 +141,21 @@ class Book {
     });
   }
 
-  checkingValue() {
-    logButton.addEventListener('click', () => {
-      console.log(this.title);
-      console.log(this.library);
+  setLocalStroage() {
+    localStorage.setItem('library', JSON.stringify(this.library));
+  }
+
+  getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('library'));
+    console.log(data);
+
+    if (!data) return;
+
+    this.library = data;
+    console.log(this.library);
+
+    this.library.forEach(value => {
+      this.createBook(value);
     });
   }
 }
