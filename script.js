@@ -72,7 +72,7 @@ class Book {
 
     this.changeButtonColor(readButton, newBook);
     this.checkReadBox(readButton, newBook);
-    this.removeBook(removeButton, addedBook);
+    this.removeBook(removeButton, addedBook, newBook);
   }
 
   submitBook() {
@@ -123,21 +123,34 @@ class Book {
         checkbox.classList.remove('green-button');
         checkbox.classList.add('checkread-btn');
         newBook.checkRead = false;
-        console.log(newBook.checkRead);
+        this.setLocalStroage();
       } else if (checkbox.classList.contains('checkread-btn')) {
         checkbox.classList.remove('checkread-btn');
         checkbox.classList.add('green-button');
         newBook.checkRead = true;
-        console.log(newBook.checkRead);
+        this.setLocalStroage();
       } else {
         console.log('Something went wrong');
       }
     });
   }
 
-  removeBook(removeButton, addButtonForm) {
+  removeBook(removeButton, addedBook, newBook) {
     removeButton.addEventListener('click', () => {
-      addButtonForm.remove();
+      addedBook.remove();
+      // Find the index of the book to remove
+      const index = this.library.findIndex(
+        value =>
+          value.title === newBook.title &&
+          value.author === newBook.author &&
+          value.pages === newBook.pages &&
+          value.checkRead === newBook.checkRead
+      );
+
+      // Remove the book from the library array
+      this.library.splice(index, 1);
+
+      this.setLocalStroage();
     });
   }
 
@@ -147,7 +160,6 @@ class Book {
 
   getLocalStorage() {
     const data = JSON.parse(localStorage.getItem('library'));
-    console.log(data);
 
     if (!data) return;
 
